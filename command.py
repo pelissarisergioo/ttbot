@@ -1,3 +1,6 @@
+from picamera import PiCamera
+from io import BytesIO
+
 class Command(object):
     def __init__(self):
         self.commands = { 
@@ -17,6 +20,10 @@ class Command(object):
         return response
 
     def photo(self):
+	camera = PiCamera()
+	imageStream = BytesIO()
+	camera.capture(imageStream, 'jpeg')
+	#TODO: send image as attachment
         return "Taking a Picture"
     
     def jump(self):
